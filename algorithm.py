@@ -89,11 +89,24 @@ def load_trained_model():
 
 load_trained_model()
 
-img = Image.open("filename")
-img.load()
-data=np.asarray(img,dtype="int32")
-Pred=model.predict(data)
 
+img = Image.open("0_img.png")
+gray=img.convert('L')
+bw=np.asarray(gray).copy()
+bw[bw<128] =0
+bw[bw>=128]=255
+
+imfile=Image.fromarray(bw)
+# imfile.save("result_bw.png")
+
+
+data=np.asarray(imfile,dtype="int32")
+print data.shape
+ynew = data.reshape(1,176,176,1)
+Pred = model.predict(ynew)
+predc = model.predict_classes(ynew)
+
+print Pred
 
 
 
