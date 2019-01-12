@@ -6,21 +6,26 @@
 # 404 -- the resource you tried to access wasn't found on the server.
 
 import requests
+import json
+import os
+from PIL import Image
 
-response = requests.get('http://127.0.0.1:8000/image/api')
+url = 'http://127.0.0.1:8000/image/api'
 
-print(response.content.decode('utf-8'))
+# get data from the API
+def getData(link):
+    response = requests.get(link)
+    data = response.json()
+    return data['path']
 
-# The json library has two main methods:
-
-# dumps -- Takes in a Python object, and converts it to a string.
-# loads -- Takes a JSON string, and converts it to a Python object.
-
-
-
+def extractImage():
+    nodePath = getData(url)
+    imagePath =  = '/Users/aakashvarma/Documents/Coding/Med-I/' + nodePath
+    myimage = Image.open(filename)
+    myimage.load()
 
 
-
+extractImage()
 
 
 
